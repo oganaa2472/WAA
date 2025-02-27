@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/users")
@@ -25,7 +26,7 @@ public class UserController {
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping // POST - /api/users
     public void save(@RequestBody User user) { // Json --> Java
-        userService.save(user);
+        userService.saveUser(user);
     }
     @ResponseStatus(HttpStatus.OK)
     @GetMapping // GET - localhost:8080/api/users
@@ -36,7 +37,7 @@ public class UserController {
     @ResponseStatus(HttpStatus.OK)
 
     @GetMapping("/{id}")
-    public User getById(@PathVariable("id") int id) {
+    public Optional<User> getById(@PathVariable("id") int id) {
         return userService.getById(id);
     }
 

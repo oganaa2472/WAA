@@ -10,35 +10,31 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+
+import java.util.Optional;
 @Service
 
 public class UserServiceImpl implements UserService {
-    @Autowired
-    private final UserRepo userRepo;
 
-    public UserServiceImpl(UserRepo userRepo) {
-        this.userRepo = userRepo;
-    }
-    @Override
-    public List<User> findAll() {
-        return userRepo.findAll();
-    }
 
-    @Override
-    public User getById(int id) {
-        return userRepo.findById(id).get();
-    }
 
-    @Override
-    public void save(User user) {
-        userRepo.save(user);
-    }
+        @Autowired
+        private UserRepo userRepository;
 
-    @Override
-    public List<Post> getUserPosts(int id) {
-            return userRepo.findById(id)
-                    .map(User::getPostList)
-                    .orElseThrow(() -> new RuntimeException("User not found"));
-    }
+        public List<User> findAll() {
+            return userRepository.findAll();
+        }
+
+        public Optional<User> getById(int id) {
+            return userRepository.findById(id);
+        }
+
+        public void saveUser(User user) {
+            userRepository.save(user);
+        }
+
+        public List<Post> getUserPosts(int id) {
+            return userRepository.findById(id).map(User::getPostList).orElse(null);
+        }
 
 }

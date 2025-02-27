@@ -6,4 +6,5 @@ public class PostDto {
     String name;
     String content;
     String author;
+
 }

@@ -1,6 +1,7 @@
 package com.miu.demo.controller;
 
 import com.miu.demo.domain.Post;
+import com.miu.demo.domain.User;
 import com.miu.demo.domain.dto.PostDto;
 import com.miu.demo.repository.UserRepo;
 import com.miu.demo.service.PostService;
@@ -9,6 +10,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/posts")
@@ -26,21 +29,28 @@ public class PostController {
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping // POST - /api/posts
-    public void save(@RequestBody Post p) { // Json --> Java
-
+    public void save(@RequestBody Map<String, Object> payload) { // Json --> Java
+        int userId = ((Number) payload.get("user_id")).intValue();
+        User user = userRepo.findById(userId)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+        Post post = new Post();
+        post.setName((String) payload.get("name"));
+        post.setContent((String) payload.get("content"));
+        post.setAuthor((String) payload.get("author"));
+        post.setUser(user);
 //        User user = userRepo.findById(p.)
-        postService.save(p);
+        postService.savePost(post);
     }
     @ResponseStatus(HttpStatus.OK)
     @GetMapping // GET - localhost:8080/api/posts
-    public List<PostDto> getAll() {
+    public List<Post> getAll() {
         return postService.findAll();
     }
-    @ResponseStatus(HttpStatus.OK)
-    @DeleteMapping("/{id}")
-    public void delete(@PathVariable int id) {
-        postService.delete(id);
-    }
+//    @ResponseStatus(HttpStatus.OK)
+//    @DeleteMapping("/{id}")
+//    public void delete(@PathVariable int id) {
+//        postService.delete(id);
+//    }
     @ResponseStatus(HttpStatus.OK)
     @PutMapping("/{id}")
     public void update(@PathVariable("id") int productId, @RequestBody PostDto p) {
@@ -59,7 +69,7 @@ public class PostController {
         return null;
     }
     @GetMapping("/{id}")
-    public PostDto getById(@PathVariable("id") int id) {
+    public Optional<Post> getById(@PathVariable("id") int id) {
         return postService.getById(id);
     }
 

@@ -1,9 +1,11 @@
 package com.miu.demo.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 import java.util.List;
 @Entity
+//@Table(name = "PostUser")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -38,10 +40,7 @@ public class User {
         return postList;
     }
     String name;
-    @OneToMany
-    @JoinColumn(name = "user_id")  // This creates a foreign key column 'user_id' in the Post table
-
-
+    @OneToMany(mappedBy = "user")
     List<Post> postList;
 
 }
