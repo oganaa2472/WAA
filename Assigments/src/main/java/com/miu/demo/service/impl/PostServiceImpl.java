@@ -40,21 +40,21 @@ public class PostServiceImpl implements PostService {
 
     @Override
     public void delete(int id) {
-        postRepo.delete(id);
+        postRepo.deleteById(id);
     }
 
-    @Override
-    public void update(int id, PostDto postDto) {
-        postRepo.update(id,modelMapper.map(postDto,Post.class));
-    }
+//    @Override
+//    public void update(int id, PostDto postDto) {
+//        postRepo.(id,modelMapper.map(postDto,Post.class));
+//    }
 
-    @Override
-    public List<PostDto> getPostsByAuthor(String author) {
-        return  listMapper.mapList(postRepo.getPostsByAuthor(author),new PostDto());
-    }
-
-    @Override
-    public List<PostDto> searchPostsByAuthor(String text) {
-        return  listMapper.mapList(postRepo.searchPostsByAuthor(text),new PostDto());
-    }
+//    @Override
+//    public List<PostDto> getPostsByAuthor(String author) {
+//        return  listMapper.mapList(postRepo.getPostsByAuthor(author),new PostDto());
+//    }
+//
+//    @Override
+//    public List<PostDto> searchPostsByAuthor(String text) {
+//        return  listMapper.mapList(postRepo.searchPostsByAuthor(text),new PostDto());
+//    }
 }

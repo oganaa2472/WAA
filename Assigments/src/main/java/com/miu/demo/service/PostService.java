@@ -11,7 +11,7 @@ public interface PostService {
     PostDto getById(int id);
     void save(Post post);
     void delete(int id);
-    void update(int id, PostDto postDto);
-    public List<PostDto> getPostsByAuthor(String author);
-    public List<PostDto> searchPostsByAuthor(String text);
+//    void update(int id, PostDto postDto);
+//    public List<PostDto> getPostsByAuthor(String author);
+//    public List<PostDto> searchPostsByAuthor(String text);
 }

@@ -1,4 +1,8 @@
 package com.miu.demo.repository;
 
-public class UserRepo {
+import com.miu.demo.domain.Post;
+import com.miu.demo.domain.User;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface UserRepo extends JpaRepository<User, Integer> {
 }

@@ -1,22 +1,31 @@
 package com.miu.demo.domain;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
+
 import java.time.LocalDateTime;
 import java.util.List;
+
+@Entity
 public class Post {
-    long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    int id;
     String name;
     String content;
     String author;
+
+
     public Post() {}
-    public Post(long id, String name, String content, String author) {
+    public Post(int id, String name, String content, String author,User user    ) {
         this.id = id;
         this.name = name;
         this.content = content;
         this.author = author;
-    }
 
-    public void setId(long id) {
+    }
+    public void setId(int id) {
         this.id = id;
     }
 
