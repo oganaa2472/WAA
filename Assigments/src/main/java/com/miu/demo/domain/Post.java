@@ -18,20 +18,33 @@ public class Post {
     String content;
     String author;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false) // ✅ Гадны түлхүүрийг заана
-    @JsonBackReference
-    private User user;
+//    @ManyToOne
+//    @JoinColumn(name = "user_id", nullable = false)
+//    @JsonBackReference
+//    private User user;
 
-    public User getUser() {return user;}
-    public void setUser(User user) {this.user = user;}
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "post_id") // Foreign key comment table-д post_id гэж хадгалагдана
+    private List<Comment> comments;
+
+    public List<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
+    }
+
+//    public User getUser() {return user;}
+//    public void setUser(User user) {this.user = user;}
+//
     public Post() {}
     public Post(int id, String name, String content, String author,User user ) {
         this.id = id;
         this.name = name;
         this.content = content;
         this.author = author;
-        this.user = user;
+//        this.user = user;
     }
     public void setId(int id) {
         this.id = id;

@@ -12,4 +12,5 @@ public interface UserService {
     Optional<User> getById(int id);
     void saveUser(User user);
     public List<Post> getUserPosts(int id);
+//    public Optional<User> deleteUser(int id);
 }

@@ -26,21 +26,26 @@ public class PostController {
         this.postService = postService;
         this.userRepo = userRepo;
     }
-
-    @ResponseStatus(HttpStatus.CREATED)
-    @PostMapping // POST - /api/posts
-    public void save(@RequestBody Map<String, Object> payload) { // Json --> Java
-        int userId = ((Number) payload.get("user_id")).intValue();
-        User user = userRepo.findById(userId)
-                .orElseThrow(() -> new RuntimeException("User not found"));
-        Post post = new Post();
-        post.setName((String) payload.get("name"));
-        post.setContent((String) payload.get("content"));
-        post.setAuthor((String) payload.get("author"));
-        post.setUser(user);
-//        User user = userRepo.findById(p.)
-        postService.savePost(post);
+    @PostMapping
+    public void createPost(@RequestBody Post post) {
+         postService.savePost(post);
     }
+
+//    @ResponseStatus(HttpStatus.CREATED)
+//    @PostMapping // POST - /api/posts
+//    public void save(@RequestBody Map<String, Object> payload) { // Json --> Java
+//        int userId = ((Number) payload.get("user_id")).intValue();
+//        User user = userRepo.findById(userId)
+//                .orElseThrow(() -> new RuntimeException("User not found"));
+//        Post post = new Post();
+//        post.setName((String) payload.get("name"));
+//        post.setContent((String) payload.get("content"));
+//        post.setAuthor((String) payload.get("author"));
+//        post.setUser(user);
+////        User user = userRepo.findById(p.)
+//        postService.savePost(post);
+//    }
+
     @ResponseStatus(HttpStatus.OK)
     @GetMapping // GET - localhost:8080/api/posts
     public List<Post> getAll() {
@@ -72,5 +77,8 @@ public class PostController {
     public Optional<Post> getById(@PathVariable("id") int id) {
         return postService.getById(id);
     }
-
+    @GetMapping("/search")
+    public List<Post> searchByTitle(@RequestParam String title) {
+        return postService.searchByTitle(title);
+    }
 }

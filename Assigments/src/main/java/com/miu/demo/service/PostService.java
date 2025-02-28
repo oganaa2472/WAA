@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface PostService {
+    public List<Post> searchByTitle(String title);
     public List<Post> findAll();
     Optional<Post> getById(int id);
     void savePost(Post post);

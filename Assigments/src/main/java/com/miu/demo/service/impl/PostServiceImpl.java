@@ -17,7 +17,9 @@ public class PostServiceImpl implements PostService {
 
     @Autowired
     private PostRepo postRepository;
-
+    public List<Post> searchByTitle(String title) {
+        return postRepository.findByTitleContaining(title);
+    }
     public List<Post> findAll() {
         return postRepository.findAll();
     }

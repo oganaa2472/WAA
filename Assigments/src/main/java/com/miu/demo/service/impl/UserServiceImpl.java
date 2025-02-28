@@ -36,5 +36,7 @@ public class UserServiceImpl implements UserService {
         public List<Post> getUserPosts(int id) {
             return userRepository.findById(id).map(User::getPostList).orElse(null);
         }
-
+//        public Optional<User> deleteUser(int id) {
+//            return userRepository.deleteById(id);
+//        }
 }
