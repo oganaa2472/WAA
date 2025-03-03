@@ -24,11 +24,8 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
-    public Comment saved(int postId,Comment comment) {
-        Post post = postRepo.findById(postId).orElseThrow(() -> new RuntimeException("Post not found"));
-        post.getComments().add(comment);
-        postRepo.save(post);
-        return comment;
+    public void saved(Comment comment) {
+        commentRepo.save(comment);
     }
     @Override
     public List<Comment> findAll() {
@@ -37,5 +34,10 @@ public class CommentServiceImpl implements CommentService {
     @Override
     public Optional<Comment> findById(int id) {
         return commentRepo.findById(id);
+    }
+
+    @Override
+    public void delete(int id) {
+        commentRepo.deleteById(id);
     }
 }

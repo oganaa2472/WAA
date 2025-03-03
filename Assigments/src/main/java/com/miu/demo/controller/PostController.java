@@ -26,26 +26,23 @@ public class PostController {
         this.postService = postService;
         this.userRepo = userRepo;
     }
-    @PostMapping
-    public void createPost(@RequestBody Post post) {
-         postService.savePost(post);
+    @GetMapping("/{id}")
+    public Optional<Post> getById(@PathVariable("id") int id) {
+        return postService.getById(id);
     }
-
-//    @ResponseStatus(HttpStatus.CREATED)
-//    @PostMapping // POST - /api/posts
-//    public void save(@RequestBody Map<String, Object> payload) { // Json --> Java
-//        int userId = ((Number) payload.get("user_id")).intValue();
-//        User user = userRepo.findById(userId)
-//                .orElseThrow(() -> new RuntimeException("User not found"));
-//        Post post = new Post();
-//        post.setName((String) payload.get("name"));
-//        post.setContent((String) payload.get("content"));
-//        post.setAuthor((String) payload.get("author"));
-//        post.setUser(user);
-////        User user = userRepo.findById(p.)
-//        postService.savePost(post);
-//    }
-
+    @PostMapping
+    public void createPost(@RequestBody Map<String, Object> payload) {
+        int userId = ((Number) payload.get("user_id")).intValue();
+        User user = userRepo.findById(userId)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+        Post post = new Post();
+        post.setName((String) payload.get("name"));
+        post.setContent((String) payload.get("content"));
+        post.setAuthor((String) payload.get("author"));
+        user.getPostList().add(post);
+        postService.save(post);
+        userRepo.save(user);
+    }
     @ResponseStatus(HttpStatus.OK)
     @GetMapping // GET - localhost:8080/api/posts
     public List<Post> getAll() {
@@ -56,29 +53,26 @@ public class PostController {
 //    public void delete(@PathVariable int id) {
 //        postService.delete(id);
 //    }
-    @ResponseStatus(HttpStatus.OK)
-    @PutMapping("/{id}")
-    public void update(@PathVariable("id") int productId, @RequestBody PostDto p) {
+//    @ResponseStatus(HttpStatus.OK)
+//    @PutMapping("/{id}")
+//    public void update(@PathVariable("id") int productId, @RequestBody PostDto p) {
 //        postService.update(productId, p);
-    }
-    @ResponseStatus(HttpStatus.OK)
-    @GetMapping("/by-author")
-    public List<PostDto> getPostsByAuthor(@RequestParam String author) {
-//        return postService.getPostsByAuthor(author);
-        return null;
-    }
-    @ResponseStatus(HttpStatus.OK)
-    @GetMapping("/search-author")
-    public List<PostDto> searchPostsByAuthor(@RequestParam String text) {
+//    }
+//    @ResponseStatus(HttpStatus.OK)
+//    @GetMapping("/by-author")
+//    public List<PostDto> getPostsByAuthor(@RequestParam String author) {
+////        return postService.getPostsByAuthor(author);
+//        return null;
+//    }
+//    @ResponseStatus(HttpStatus.OK)
+//    @GetMapping("/search-author")
+//    public List<Post> searchPostsByAuthor(@RequestParam String text) {
 //        return postService.searchPostsByAuthor(text);
-        return null;
-    }
-    @GetMapping("/{id}")
-    public Optional<Post> getById(@PathVariable("id") int id) {
-        return postService.getById(id);
-    }
-    @GetMapping("/search")
-    public List<Post> searchByTitle(@RequestParam String title) {
-        return postService.searchByTitle(title);
-    }
+//        return null;
+//    }
+
+//    @GetMapping("/search")
+//    public List<Post> searchByTitle(@RequestParam String title) {
+//        return postService.searchByTitle(title);
+//    }
 }

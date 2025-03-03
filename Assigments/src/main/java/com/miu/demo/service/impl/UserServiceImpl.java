@@ -15,9 +15,6 @@ import java.util.Optional;
 @Service
 
 public class UserServiceImpl implements UserService {
-
-
-
         @Autowired
         private UserRepo userRepository;
 
@@ -34,9 +31,11 @@ public class UserServiceImpl implements UserService {
         }
 
         public List<Post> getUserPosts(int id) {
+//            return null;
             return userRepository.findById(id).map(User::getPostList).orElse(null);
         }
-//        public Optional<User> deleteUser(int id) {
-//            return userRepository.deleteById(id);
-//        }
+        @Override
+        public void delete(int id) {
+            userRepository.deleteById(id);
+        }
 }

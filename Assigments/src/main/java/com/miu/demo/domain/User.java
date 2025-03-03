@@ -2,45 +2,31 @@ package com.miu.demo.domain;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.List;
 @Entity
-//@Table(name = "PostUser")
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Table(name = "users")
+
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    int id;
-    public User(){}
-    public User(int id, List<Post> postList, String name) {
-        this.id = id;
-        this.postList = postList;
-        this.name = name;
-    }
-    public void setId(int id) {
-        this.id = id;
-    }
+    private int id;
 
-    public void setName(String name) {
-        this.name = name;
-    }
+    private String email;
+    private String password;
+    private String firstname;
+    private String lastname;
 
-    public void setPostList(List<Post> postList) {
-        this.postList = postList;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public List<Post> getPostList() {
-        return postList;
-    }
-    String name;
-    @OneToMany(mappedBy = "user")
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "user_id")
     List<Post> postList;
-
+//
+//    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, orphanRemoval = true)
+//    private List<Comment> comments;
 }

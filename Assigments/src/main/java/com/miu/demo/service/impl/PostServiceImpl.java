@@ -16,24 +16,29 @@ import java.util.Optional;
 public class PostServiceImpl implements PostService {
 
     @Autowired
-    private PostRepo postRepository;
-    public List<Post> searchByTitle(String title) {
-        return postRepository.findByTitleContaining(title);
-    }
+    private PostRepo postRepo;
+
+//    public List<Post> searchByTitle(String title) {
+//        return postRepo.findByTitleContaining(title);
+//    }
     public List<Post> findAll() {
-        return postRepository.findAll();
+        return postRepo.findAll();
     }
-
     public Optional<Post> getById(int id) {
-        return postRepository.findById(id);
+        return postRepo.findById(id);
+    }
+    public void save(Post post) {
+         postRepo.save(post);
+    }
+    public void delete(int id) {
+        postRepo.deleteById(id);
     }
 
-    public void savePost(Post post) {
-         postRepository.save(post);
-    }
-
-
-//    @Autowired
+//    @Override
+//    public void update(int id, Post post) {
+//
+//    }
+    //    @Autowired
 //    private final PostRepo postRepo;
 //
 //    @Autowired
@@ -71,7 +76,8 @@ public class PostServiceImpl implements PostService {
 //    }
 //
 //    @Override
-//    public List<PostDto> searchPostsByAuthor(String text) {
+//    public List<Post> searchPostsByAuthor(String text) {
+//        return postRepo.searchPostsByAuthor(text);
 //        return  listMapper.mapList(postRepo.searchPostsByAuthor(text),new PostDto());
 //    }
 }

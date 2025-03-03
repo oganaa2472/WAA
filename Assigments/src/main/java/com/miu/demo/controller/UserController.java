@@ -7,6 +7,7 @@ import com.miu.demo.service.PostService;
 import com.miu.demo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -43,12 +44,14 @@ public class UserController {
 
     @GetMapping("/{id}/posts")
     public List<Post> getUserPosts(@PathVariable int id) {
+
         return userService.getUserPosts(id);
     }
 
-//
-//    @DeleteMapping("/id")
-//    public Optional<User> delete(@PathVariable("id") int id) {
-//        return userService.deleteUser(id);
-//    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> delete(@PathVariable("id") int id) {
+        userService.delete(id);
+        return ResponseEntity.ok("Succesfully");
+    }
 }
