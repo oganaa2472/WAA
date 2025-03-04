@@ -6,8 +6,10 @@ import com.miu.demo.domain.dto.PostDto;
 import com.miu.demo.service.PostService;
 import com.miu.demo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -54,4 +56,10 @@ public class UserController {
         userService.delete(id);
         return ResponseEntity.ok("Succesfully");
     }
+    @GetMapping("/more-than/{n}")
+    public ResponseEntity<List<User>> getUsersWithMoreThanNPosts(@PathVariable int n) {
+        List<User> users = userService.getUserPostsByUserId(n);
+        return ResponseEntity.ok(users);
+    }
+
 }

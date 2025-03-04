@@ -38,4 +38,9 @@ public class UserServiceImpl implements UserService {
         public void delete(int id) {
             userRepository.deleteById(id);
         }
+
+    @Override
+    public List<User> getUserPostsByUserId(int id) {
+        return userRepository.findUsersWithMoreThanNPosts(id);
+    }
 }

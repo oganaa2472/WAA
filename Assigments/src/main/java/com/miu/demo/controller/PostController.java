@@ -71,8 +71,8 @@ public class PostController {
 //        return null;
 //    }
 
-//    @GetMapping("/search")
-//    public List<Post> searchByTitle(@RequestParam String title) {
-//        return postService.searchByTitle(title);
-//    }
+    @GetMapping("/by-title/{title}")
+    public List<Post> searchByTitle(@PathVariable String title) {
+        return postService.searchByTitle(title);
+    }
 }

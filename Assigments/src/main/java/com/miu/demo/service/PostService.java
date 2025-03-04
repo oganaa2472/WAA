@@ -8,12 +8,12 @@ import java.util.List;
 import java.util.Optional;
 
 public interface PostService {
-//    public List<Post> searchByTitle(String title);
+    public List<Post> searchByTitle(String title);
     public List<Post> findAll();
     Optional<Post> getById(int id);
     void save(Post post);
     void delete(int id);
 //    void update(int id, Post post);
 //    public List<Post> getPostsByAuthor(String author);
-//    public List<Post> searchPostsByAuthor(String text);
+//    public List<Post> searchByTitle(String text);
 }

@@ -18,7 +18,12 @@ public class PostServiceImpl implements PostService {
     @Autowired
     private PostRepo postRepo;
 
-//    public List<Post> searchByTitle(String title) {
+    @Override
+    public List<Post> searchByTitle(String title) {
+        return postRepo.searchByTitle(title);
+    }
+
+    //    public List<Post> searchByTitle(String title) {
 //        return postRepo.findByTitleContaining(title);
 //    }
     public List<Post> findAll() {
@@ -33,6 +38,7 @@ public class PostServiceImpl implements PostService {
     public void delete(int id) {
         postRepo.deleteById(id);
     }
+
 
 //    @Override
 //    public void update(int id, Post post) {
