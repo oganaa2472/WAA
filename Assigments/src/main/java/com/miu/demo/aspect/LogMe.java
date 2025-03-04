@@ -1,4 +1,4 @@
-package com.miu.demo.aspect.annotation;
+package com.miu.demo.aspect;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Target;

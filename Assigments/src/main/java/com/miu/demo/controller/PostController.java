@@ -43,6 +43,7 @@ public class PostController {
         postService.save(post);
         userRepo.save(user);
     }
+
     @ResponseStatus(HttpStatus.OK)
     @GetMapping // GET - localhost:8080/api/posts
     public List<Post> getAll() {
@@ -70,7 +71,6 @@ public class PostController {
 //        return postService.searchPostsByAuthor(text);
 //        return null;
 //    }
-
     @GetMapping("/by-title/{title}")
     public List<Post> searchByTitle(@PathVariable String title) {
         return postService.searchByTitle(title);

@@ -1,15 +1,13 @@
 package com.miu.demo.controller;
 
+import com.miu.demo.aspect.ExecutionTime;
+import com.miu.demo.aspect.LogMe;
 import com.miu.demo.domain.Post;
 import com.miu.demo.domain.User;
-import com.miu.demo.domain.dto.PostDto;
-import com.miu.demo.service.PostService;
 import com.miu.demo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -38,7 +36,8 @@ public class UserController {
     }
 
     @ResponseStatus(HttpStatus.OK)
-
+    @ExecutionTime
+    @LogMe
     @GetMapping("/{id}")
     public Optional<User> getById(@PathVariable("id") int id) {
         return userService.getById(id);
