@@ -30,7 +30,7 @@ public class User {
 //    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, orphanRemoval = true)
 //    private List<Comment> comments;
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable
-    private List<Role> roles;
+//    @ManyToMany(fetch = FetchType.EAGER)
+//    @JoinTable
+//    private List<Role> roles;
 }

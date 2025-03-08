@@ -13,8 +13,8 @@ public class ExecutionTimeAspect {
         long startTime = System.currentTimeMillis();
         Object result = joinPoint.proceed();
         long endTime = System.currentTimeMillis();
-
         System.out.println(joinPoint.getSignature() + " executed in " + (endTime - startTime) + "ms");
+
         return result;
     }
 }

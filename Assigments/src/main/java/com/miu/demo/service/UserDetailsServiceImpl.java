@@ -1,4 +1,4 @@
-
+package com.miu.demo.service;
 
 import com.miu.demo.domain.UserDetailsModel;
 import com.miu.demo.repository.UseDetailsRepo;
@@ -9,7 +9,6 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 public class UserDetailsServiceImpl  implements UserDetailsService {
 
-    @Autowired
     UseDetailsRepo userDetailsRepository;
 
     @Override

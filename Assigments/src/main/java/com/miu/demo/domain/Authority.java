@@ -1,4 +1,4 @@
-package miu.edu.demo.entities;
+package com.miu.demo.domain;
 
 import lombok.Data;
 
