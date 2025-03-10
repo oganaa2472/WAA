@@ -1,0 +1,12 @@
+.out-of-stock {
+    color: red;
+  }
+  
+  .in-stock {
+    color: green;
+  }
+  .border{
+    padding:5px;
+    margin:10px;
+    border:1px #fff solid;
+  }
