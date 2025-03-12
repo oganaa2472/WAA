@@ -11,14 +11,28 @@ import org.springframework.stereotype.Component;
 import java.util.*;
 import java.util.function.Function;
 
+import io.jsonwebtoken.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.stereotype.Component;
+
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.function.Function;
+
 @Component
 public class JwtUtil {
 
+
     @Autowired
-    UserDetailsService userDetailsService;
+    private UserDetailsService userDetailsService;
+
     private final String secret = "top-secret";
     private final long expiration = 5 * 60 * 60 * 60;
-    //     private final long expiration = 5;
     private final long refreshExpiration = 5 * 60 * 60 * 60 * 60;
 
     // this wil extract a claim from a token, its used in the methods above to get the username and date
@@ -51,24 +65,6 @@ public class JwtUtil {
         return expiration.before(new Date());
     }
 
-//    public String generateToken(UserDetails userDetails) {
-//        Map<String, Object> claims = new HashMap<>();
-//        claims.put("roles",userDetails.getAuthorities());
-//
-//        return doGenerateToken(claims, userDetails.getUsername());
-//    }
-
-
-//    private String doGenerateToken(Map<String, Object> claims, String subject) {
-//        return Jwts.builder()
-//                .setClaims(claims)
-//                .setSubject(subject)
-//                .setIssuedAt(new Date())
-//                .setExpiration(new Date(System.currentTimeMillis() + expiration))
-//                .signWith(SignatureAlgorithm.HS512, secret)
-//                .compact();
-//    }
-
     // Overridden to accommodate the refresh token
     public String doGenerateToken(String subject) {
         return Jwts.builder()
@@ -78,15 +74,6 @@ public class JwtUtil {
                 .signWith(SignatureAlgorithm.HS512, secret)
                 .compact();
     }
-
-//    public String generateRefreshToken(String email) {
-//        return Jwts.builder()
-//                .setSubject(email)
-//                .setIssuedAt(new Date())
-//                .setExpiration(new Date(System.currentTimeMillis() + refreshExpiration))
-//                .signWith(SignatureAlgorithm.HS512, secret)
-//                .compact();
-//    }
 
     public String getSubject(String token) {
         return Jwts.parser()
@@ -132,7 +119,8 @@ public class JwtUtil {
                 .setSubject(subject)
                 .setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(new Date(System.currentTimeMillis() + expiration * 1000))
-                .signWith(SignatureAlgorithm.HS512, secret).compact();
+                .signWith(SignatureAlgorithm.HS512, secret)
+                .compact();
     }
 
     public boolean validateToken(String token) {
@@ -141,15 +129,7 @@ public class JwtUtil {
                     .setSigningKey(secret)
                     .parseClaimsJws(token);
             return true;
-        } catch (SignatureException e) {
-            System.out.println(e.getMessage());
-        } catch (MalformedJwtException e) {
-            System.out.println(e.getMessage());
-        } catch (ExpiredJwtException e) {
-            System.out.println(e.getMessage());
-        } catch (UnsupportedJwtException e) {
-            System.out.println(e.getMessage());
-        } catch (IllegalArgumentException e) {
+        } catch (MalformedJwtException | ExpiredJwtException | UnsupportedJwtException | IllegalArgumentException e) {
             System.out.println(e.getMessage());
         }
         return false;

@@ -1,32 +1,28 @@
 package com.miu.demo.filter;
 
 import com.miu.demo.util.JwtUtil;
-import io.jsonwebtoken.ExpiredJwtException;
-
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
+import jakarta.servlet.FilterChain;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
-
-import jakarta.servlet.*;
-import jakarta.servlet.http.*;
 
 import java.io.IOException;
 
 @Component
-public class JWTFilter extends OncePerRequestFilter {
+public class JwtFilter extends OncePerRequestFilter {
 
     private final JwtUtil jwtUtil;
 
-    private final UserDetailsService userDetailsService;
-
-    public JWTFilter(JwtUtil jwtUtil, UserDetailsService userDetailsService) {
+    public JwtFilter(JwtUtil jwtUtil) {
         this.jwtUtil = jwtUtil;
-        this.userDetailsService = userDetailsService;
     }
+    private static final Log log = LogFactory.getLog(JwtFilter.class.getName());
+    private static final boolean trace = log.isTraceEnabled();
 
     @Override
     protected void doFilterInternal(HttpServletRequest request,
@@ -42,18 +38,10 @@ public class JWTFilter extends OncePerRequestFilter {
         filterChain.doFilter(request, response);
     }
 
-    /**
-     * Helper method
-     *
-     * @param request
-     * @return
-     */
     public String extractTokenFromRequest(HttpServletRequest request) {
         final String authorizationHeader = request.getHeader("Authorization");
-
         if (authorizationHeader != null && authorizationHeader.startsWith("Bearer ")) {
-            var token = authorizationHeader.substring(7);
-            return token;
+            return authorizationHeader.substring(7);
         }
         return null;
     }

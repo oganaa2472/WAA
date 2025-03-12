@@ -1,7 +1,5 @@
-package com.miu.demo.helper;
+package com.miu.demo.domain;
 
-import com.miu.demo.domain.Role;
-import com.miu.demo.domain.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;

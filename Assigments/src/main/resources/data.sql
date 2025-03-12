@@ -1,10 +1,30 @@
 -- USERS
+INSERT INTO "user" (id, email, firstname, lastname, password)
+VALUES (111, 'uinan@miu.edu', 'umur', 'inan', '$2a$12$IKEQb00u5QpZMx4v5zMweu.3wrq0pS7XLCHO4yHZ.BW/yvWu1feo2'); --123
+INSERT INTO "user" (id, email, firstname, lastname, password)
+VALUES (112, 'john@miu.edu', 'john', 'doe', '$2a$12$IKEQb00u5QpZMx4v5zMweu.3wrq0pS7XLCHO4yHZ.BW/yvWu1feo2'); --123
+INSERT INTO "user" (id, email, firstname, lastname, password)
+VALUES (113, 'dean@miu.edu', 'Dean', 'Altarawneh', '$2a$12$IKEQb00u5QpZMx4v5zMweu.3wrq0pS7XLCHO4yHZ.BW/yvWu1feo2'); --123
 
-INSERT INTO user_details_model (id, username, password)
-VALUES (111, 'uinan@miu.edu',  '$2a$12$IKEQb00u5QpZMx4v5zMweu.3wrq0pS7XLCHO4yHZ.BW/yvWu1feo2'); --123
+INSERT INTO role (id, role)
+VALUES (1, 'ADMIN');
+INSERT INTO role (id, role)
+VALUES (2, 'USER');
 
-INSERT INTO user_details_model (id, username, password)
-VALUES (112, 'john@miu.edu',  '$2a$12$IKEQb00u5QpZMx4v5zMweu.3wrq0pS7XLCHO4yHZ.BW/yvWu1feo2'); --123
+
+INSERT INTO user_roles (user_id, roles_id)
+VALUES (111, 1);
+INSERT INTO user_roles (user_id, roles_id)
+VALUES (112, 1);
+INSERT INTO user_roles (user_id, roles_id)
+VALUES (113, 2);
+-- (2, 'jane_smith', 'jane@example.com', 'password456', 'Jane', 'Smith'),
+-- (3, 'alice_wonder', 'alice@example.com', 'password789', 'Alice', 'Wonderland');
+-- INSERT INTO user (id, email,name, firstname, lastname, password)
+-- VALUES (111, 'uinan@miu.edu', name:'uina','uina','john', '$2a$12$IKEQb00u5QpZMx4v5zMweu.3wrq0pS7XLCHO4yHZ.BW/yvWu1feo2'); --123
+
+-- INSERT INTO user (id, email,name, firstname, lastname, password)
+-- VALUES (112, 'john@miu.edu','john','john','john', '$2a$12$IKEQb00u5QpZMx4v5zMweu.3wrq0pS7XLCHO4yHZ.BW/yvWu1feo2'); --123
 
 -- INSERT INTO users (id, email, firstname, lastname, password)
 -- VALUES (113, 'muhyidean@miu.edu', 'muhyidean', 'al-tarawneh', '$2a$12$IKEQb00u5QpZMx4v5zMweu.3wrq0pS7XLCHO4yHZ.BW/yvWu1feo2'); --123
@@ -25,30 +45,30 @@ VALUES (112, 'john@miu.edu',  '$2a$12$IKEQb00u5QpZMx4v5zMweu.3wrq0pS7XLCHO4yHZ.B
 -- INSERT INTO users (id, email, firstname, lastname, password)
 -- VALUES (3, 'dean@miu.edu', 'Dean', 'Altarawneh', '$2a$12$IKEQb00u5QpZMx4v5zMweu.3wrq0pS7XLCHO4yHZ.BW/yvWu1feo2'); --123
 
-INSERT INTO authority (id, role)
-VALUES (1, 'ADMIN');
-INSERT INTO authority (id, role)
-VALUES (2, 'CLIENT');
+-- INSERT INTO authority (id, role)
+-- VALUES (1, 'ADMIN');
+-- INSERT INTO authority (id, role)
+-- VALUES (2, 'CLIENT');
 
-INSERT INTO user_details_model_authorities (user_details_model_id, authorities_id)
-VALUES (111, 1);
-INSERT INTO user_details_model_authorities (user_details_model_id, authorities_id)
-VALUES (112, 1);
-INSERT INTO user_details_model_authorities (user_details_model_id, authorities_id)
-VALUES (111, 2);
-
+-- INSERT INTO user_details_model_authorities (user_details_model_id, authorities_id)
+-- VALUES (111, 1);
+-- INSERT INTO user_details_model_authorities (user_details_model_id, authorities_id)
+-- VALUES (112, 1);
+-- INSERT INTO user_details_model_authorities (user_details_model_id, authorities_id)
+-- VALUES (111, 2);
+--
 -- Posts
---
--- INSERT INTO posts (id, name,content, author, user_id)
--- VALUES (111,'iPhone',
---         'inserts users into the database when the app starts','test', 111);
---
--- INSERT INTO posts (id, name,content, author, user_id)
--- VALUES (112, 'iPad', 'that inserts users into the database when the app starts','test', 111);
---
--- INSERT INTO posts (id, name,content, author, user_id)
--- VALUES (113, 'Speakers',  'that inserts users into the database when the app starts','test', 111);
---
+
+INSERT INTO "posts" (id, name,content, author, user_id)
+VALUES (111,'iPhone',
+        'inserts users into the database when the app starts','test', 111);
+
+INSERT INTO posts (id, name,content, author, user_id)
+VALUES (112, 'iPad', 'that inserts users into the database when the app starts','test', 111);
+
+INSERT INTO posts (id, name,content, author, user_id)
+VALUES (113, 'Speakers',  'that inserts users into the database when the app starts','test', 111);
+
 -- INSERT INTO posts (id, name,content, author, user_id)
 -- VALUES (114, 'SD Card',  'that inserts users into the database when the app starts','test', 111);
 --
@@ -66,7 +86,7 @@ VALUES (111, 2);
 --
 -- INSERT INTO posts (id, name,content, author, user_id)
 -- VALUES (119, 'Pen', 'that inserts users into the database when the app starts','test new', 112);
---
+
 -- -- Comments
 --
 -- INSERT INTO comment (id,name,post_id)

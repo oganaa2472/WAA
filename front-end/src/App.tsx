@@ -1,14 +1,17 @@
 
 import './App.css'
 import Dashboard from './Dashboard'
-
+import { PostProvider } from './PostContext.tsx';
 function App() {
   return (
     <>
     <h1>Assigment 6</h1>
-     <Dashboard>
-        
-    </Dashboard>
+    <PostProvider>
+       <Dashboard>
+    
+        </Dashboard>
+    </PostProvider>
+    
     </>
   )
 }

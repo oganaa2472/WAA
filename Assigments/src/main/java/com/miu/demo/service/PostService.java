@@ -3,11 +3,13 @@ package com.miu.demo.service;
 
 import com.miu.demo.domain.Post;
 import com.miu.demo.domain.dto.PostDto;
+import jakarta.transaction.Transactional;
 
 import java.util.List;
 import java.util.Optional;
 
 public interface PostService {
+
     public List<Post> searchByTitle(String title);
     public List<Post> findAll();
     Optional<Post> getById(int id);

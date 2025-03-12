@@ -4,6 +4,7 @@ package com.miu.demo.service.impl;
 import com.miu.demo.domain.Post;
 import com.miu.demo.repository.PostRepo;
 import com.miu.demo.service.PostService;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,6 +27,8 @@ public class PostServiceImpl implements PostService {
     //    public List<Post> searchByTitle(String title) {
 //        return postRepo.findByTitleContaining(title);
 //    }
+
+    @Transactional
     public List<Post> findAll() {
         return postRepo.findAll();
     }

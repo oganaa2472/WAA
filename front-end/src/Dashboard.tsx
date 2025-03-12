@@ -2,9 +2,9 @@
 import React, { useEffect, useState } from 'react';
 import {PostType} from './types.tsx'
 import PostList from './Components/PostList.tsx'
+import { usePosts } from './PostContext.tsx';
 const PostDetails: React.FC<{ post: PostType | null }> = ({ post }) => {
     if (!post) return <p>Select a post to see details.</p>;
-  
     return (
       <div className="border p-4 rounded-lg shadow-md">
         <h3 className="text-xl font-bold">{post.title}</h3>
@@ -21,6 +21,8 @@ const PostDetails: React.FC<{ post: PostType | null }> = ({ post }) => {
     );
   };
 const Dashboard = () => {   
+  const { state } = usePosts();
+
     const [name,setName] = useState("");
     const [posts, setPosts] = useState<PostType[]>([
         { id: 1, title: 'Post 1', author: "Ganaa", },
@@ -60,7 +62,7 @@ const Dashboard = () => {
             <button onClick={updatePost}>Update</button>
         </div>
         <ul>
-            <PostList posts={posts}  onSelect={setPost} />
+            <PostList posts={state.posts}  onSelect={setPost} />
         </ul>
         <div className="border p-4 rounded-lg shadow-md">
         <h3 className="text-xl font-bold">{post.title}</h3>

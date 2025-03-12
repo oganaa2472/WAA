@@ -1,26 +1,16 @@
 package com.miu.demo.domain;
-import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import lombok.Data;
-import lombok.RequiredArgsConstructor;
-import org.springframework.security.core.userdetails.UserDetails;
 
-import java.util.List;
-
-@RequiredArgsConstructor
-@AllArgsConstructor
-@Data
 @Entity
-public class UserDetailsModel implements UserDetails
-{
+@Data
+public class Role {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    int id;
-    String username;
-    String password;
-
-    @ManyToMany(fetch = FetchType.EAGER)
-    List<Authority> authorities;
-
-
+    private long id;
+    private String role;
 }
