@@ -5,6 +5,7 @@ import com.miu.demo.domain.User;
 import com.miu.demo.domain.dto.PostDto;
 import com.miu.demo.repository.UserRepo;
 import com.miu.demo.service.PostService;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -31,7 +32,8 @@ public class PostController {
         return postService.getById(id);
     }
     @PostMapping
-    public void createPost(@RequestBody Map<String, Object> payload) {
+    @Transactional
+    public Post createPost(@RequestBody Map<String, Object> payload) {
         int userId = ((Number) payload.get("user_id")).intValue();
         User user = userRepo.findById(userId)
                 .orElseThrow(() -> new RuntimeException("User not found"));
@@ -42,6 +44,7 @@ public class PostController {
         user.getPostList().add(post);
         postService.save(post);
         userRepo.save(user);
+        return post;
     }
 
     @ResponseStatus(HttpStatus.OK)

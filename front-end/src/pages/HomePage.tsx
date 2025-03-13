@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { NavLink } from "react-router-dom"; // Import Link for navigation
 import { Menu, X, Home, Contact, Star } from "lucide-react";
-import Dashboard from "../Dashboard";
+import Dashboard from "./Dashboard";
 // import TableView from "../TableView.tsx";
 interface NavItemProps {
   to: string;
@@ -12,7 +12,7 @@ interface NavItemProps {
 const HomePage = () => {
 //   const [isMenuOpen, setIsMenuOpen] = useState(false);
   return (
-    <div className="h-screen bg-gray-100">
+    <div >
       {/* Header */}
       <header className="bg-white shadow p-4 flex justify-between items-center">
         <h1 className="text-xl font-semibold">
@@ -21,16 +21,16 @@ const HomePage = () => {
         {/* Navigation Links (Desktop) */}
         <nav className="hidden md:flex space-x-6">
           <NavItem to="/" icon={<Home size={20} />} text="Dashboard" />
-          <NavItem to="/bookmark" icon={<Star size={20} />} text="Bookmark" />
+          <NavItem to="/add-post" icon={<Star size={20} />} text="AddPost" />
         </nav>
       </header>
 
-    
+     {/* <Dashboard /> */}
    
 
       {/* Table View Component */}
-  
-        <Dashboard />
+    
+       
         
      
     </div>

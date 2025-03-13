@@ -21,7 +21,7 @@ public class User {
     private String password;
     private String firstname;
     private String lastname;
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true,fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
     List<Post> postList;
 //

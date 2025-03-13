@@ -2,7 +2,9 @@
 
 import './PostList.css'
 import { PostType} from '../PostContext.tsx';
-import Post from './Post.tsx'
+import Post from './Post.tsx';
+
+
 const PostList: React.FC<{ posts: PostType[]}> = ({ posts }) => {
     return (
       <div>
@@ -10,6 +12,7 @@ const PostList: React.FC<{ posts: PostType[]}> = ({ posts }) => {
             {
                 posts.map((post)=>(
                     <Post key={post.id} post={post} />
+
                 ))
             }
         </ul>

@@ -1,30 +1,26 @@
-
-import './App.css'
+import './App.css';
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Dashboard from './Dashboard'
-import HomePage from './pages/HomePage.tsx'
-import Missing from './pages/Missing.tsx'
+import Dashboard from './pages/Dashboard.tsx';
+import HomePage from './pages/HomePage.tsx';
+import AddPost from './pages/AddPost.tsx';
+// Your navbar
+import Missing from './pages/Missing.tsx';
 import { PostProvider } from './PostContext.tsx';
+
 function App() {
   return (
-    <>
     <PostProvider>
-       {/* {<Dashboard />} */}
-       <Router>
+      <Router>
+        <HomePage /> Navbar stays visible on all routes
         <Routes>
-          
-          <Route path="/" element={<HomePage />} />
-          <Route path="/home" element={<HomePage />} />
-          {/* <Route path="/bookmark" element={<Bookmark />} /> */}
-          {/* <Route path="/add-contact" element={<AddContact />} /> */}
-          <Route path="*" element={<Missing />} />
+          <Route path="/" element={<Dashboard />} /> {/* Root route to Dashboard */}
+          <Route path="/home" element={<Dashboard />} /> {/* /home also renders Dashboard */}
+          <Route path="/add-post" element={<AddPost />} /> 
+          <Route path="*" element={<Missing />} /> {/* Catch-all route for 404 */}
         </Routes>
-    </Router>
-     
+      </Router>
     </PostProvider>
-    
-    </>
-  )
+  );
 }
 
-export default App
+export default App;

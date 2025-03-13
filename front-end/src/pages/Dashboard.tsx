@@ -1,13 +1,14 @@
 
 import React, { useEffect, useState } from 'react';
-import PostList from './components/PostList.tsx'
-import { usePosts,PostType } from './PostContext.tsx';
-const PostDetails: React.FC<{ post: PostType | null }> = ({ post }) => {
-    if (!post) return <p>Select a post to see details.</p>;
+
+import { usePosts,PostType } from '../PostContext.tsx';
+import PostList from '../Components/PostList.tsx';
+const PostDetails: React.FC<{ }> = () => {
+  const { state,dispatch } = usePosts();
     return (
       <div className="border p-4 rounded-lg shadow-md">
-        <h3 className="text-xl font-bold">{post.name}</h3>
-        <p>{post.name}</p>
+        <h3 className="text-xl font-bold"> {state.post?.name}</h3>
+        <p>{state.post?.name}</p>
         <div className="mt-2">
           <button color="primary" className="mr-2">
             Edit
@@ -21,7 +22,6 @@ const PostDetails: React.FC<{ post: PostType | null }> = ({ post }) => {
   };
 const Dashboard = () => {   
   const { state } = usePosts();
-
     const [name,setName] = useState("");
     const [posts, setPosts] = useState<PostType[]>([
         // { id: 1, title: 'Post 1', author: "Ganaa", },
@@ -63,18 +63,10 @@ const Dashboard = () => {
         <ul>
             <PostList posts={state.posts} />
         </ul>
-        {/* <div className="border p-4 rounded-lg shadow-md">
-        <h3 className="text-xl font-bold">{post.title}</h3>
-        <p>{post.title}</p>
-        <div className="mt-2">
-          <button color="primary" className="mr-2" >
-            Edit
-          </button>
-          <button color="secondary" onClick={()=>deletePost(post.id)}>
-            Delete
-          </button>
-        </div> */}
-      {/* </div> */}
+
+        Post
+        {state.post ? <PostDetails /> : 'false'}
+       
       </div>
     );
   }
