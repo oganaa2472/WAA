@@ -1,20 +1,22 @@
 import React, { createContext, useReducer, useContext, useEffect, ReactNode } from 'react';
 const API_URL = 'http://localhost:8080/api/posts';
-export interface Post{
+export interface PostType{
     id: number;
-    title: string;
+    name: string;
     author: string;
-    
+    content:string;
 }
 interface PostState {
-posts: Post[];
+posts: PostType[];
 loading: boolean;
+post:PostType|null;
 }
 type PostAction =
-  | { type: 'SET_CONTACTS'; posts: Post[] }
-  | { type: 'ADD_CONTACT'; post: Post }
+    | {type: 'SET_POST',post:PostType}
+  | { type: 'SET_CONTACTS'; posts: PostType[] }
+  | { type: 'ADD_CONTACT'; post: PostType }
   | { type: 'REMOVE_CONTACT'; id: number }
-  | { type: 'UPDATE_CONTACT'; post: Post }
+  | { type: 'UPDATE_CONTACT'; post: PostType }
   | { type: 'SET_LOADING'; loading: boolean };
 const postReducer = (state: PostState,action:PostAction):PostState=>{
     switch(action.type){
@@ -28,6 +30,8 @@ const postReducer = (state: PostState,action:PostAction):PostState=>{
             return {...state,posts:state.posts.map(
                 p => p.id===action.post.id?action.post:p
             )};
+        case 'SET_POST':
+            return {...state, post: action.post}
         case 'SET_LOADING':
             return { ...state, loading: action.loading };
         default: return state;
@@ -43,14 +47,14 @@ interface PostProviderProps {
   }
   
 export const PostProvider : React.FC<PostProviderProps> = ({children})=>{
-    const [state, dispatch] = useReducer(postReducer, { posts: [], loading: true });
+    const [state, dispatch] = useReducer(postReducer, { posts: [],post:null,  loading: true,});
     useEffect(()=>{
         const fetchPost = async()=>{
             dispatch({ type: 'SET_LOADING', loading: true });
             try{
                 const response = await fetch(API_URL);
                 const rejson = await response.json();
-                const data: Post[] = rejson;
+                const data: PostType[] = rejson;
                 dispatch({ type: 'SET_CONTACTS', posts: data });
             }catch(error){
                 console.error('Error fetching contacts:', error);

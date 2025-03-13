@@ -2,14 +2,20 @@ import React from 'react';
 
 
 import './Post.css'
-import { PostType } from '../types';
-const Post: React.FC<{ post: PostType; onSelect: (post: PostType) => void }> = ({ post, onSelect }) => {
+import { PostType} from '../PostContext.tsx';
+const Post: React.FC<{ post: PostType;}> = ({ post }) => {
+
+    function onSelect(post:PostType){
+      
+    }
    return (
     <div className="border p-4 rounded-lg shadow-md cursor-pointer" 
-    onClick={() => onSelect(post)}
+    onClick={()=>onSelect(post)}
     >
-      <h3 className="text-xl font-bold">{post.title}</h3>
-      <p>{post.author}</p>
+      <h4 className='text-xl font-bold'>{post.author}</h4>
+      <p className="text-xl font-bold">{post.content}</p>
+      <p>{post.content}</p>
+      
     </div>
   );
 }
