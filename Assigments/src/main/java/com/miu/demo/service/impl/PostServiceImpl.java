@@ -38,6 +38,7 @@ public class PostServiceImpl implements PostService {
     public void save(Post post) {
          postRepo.save(post);
     }
+
     public void delete(int id) {
         postRepo.deleteById(id);
     }

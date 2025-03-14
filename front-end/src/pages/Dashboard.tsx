@@ -3,23 +3,24 @@ import React, { useEffect, useState } from 'react';
 
 import { usePosts,PostType } from '../PostContext.tsx';
 import PostList from '../Components/PostList.tsx';
-const PostDetails: React.FC<{ }> = () => {
-  const { state,dispatch } = usePosts();
-    return (
-      <div className="border p-4 rounded-lg shadow-md">
-        <h3 className="text-xl font-bold"> {state.post?.name}</h3>
-        <p>{state.post?.name}</p>
-        <div className="mt-2">
-          <button color="primary" className="mr-2">
-            Edit
-          </button>
-          <button color="secondary">
-            Delete
-          </button>
-        </div>
-      </div>
-    );
-  };
+import PostDetail from '../Components/PostDetail.tsx';
+// const PostDetails: React.FC<{ }> = () => {
+//   const { state,dispatch } = usePosts();
+//     return (
+//       <div className="border p-4 rounded-lg shadow-md">
+//         <h3 className="text-xl font-bold"> {state.post?.name}</h3>
+//         <p>{state.post?.name}</p>
+//         <div className="mt-2">
+//           <button color="primary" className="mr-2">
+//             Edit
+//           </button>
+//           <button color="secondary">
+//             Delete
+//           </button>
+//         </div>
+//       </div>
+//     );
+//   };
 const Dashboard = () => {   
   const { state } = usePosts();
     const [name,setName] = useState("");
@@ -65,7 +66,7 @@ const Dashboard = () => {
         </ul>
 
         Post
-        {state.post ? <PostDetails /> : 'false'}
+        {state.post ? <PostDetail /> : 'false'}
        
       </div>
     );

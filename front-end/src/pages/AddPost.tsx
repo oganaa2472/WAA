@@ -40,41 +40,45 @@ const AddPost: React.FC = () => {
   };
 
   return (
-    <div className="flex items-center rounded-md bg-white pl-3 outline-1 -outline-offset-1 outline-gray-300 has-[input:focus-within]:outline-2 has-[input:focus-within]:-outline-offset-2 has-[input:focus-within]:outline-indigo-600">
-      <form ref={NewPostForm} onSubmit={StudentHandler}>
-        <h1>Add a Post</h1>
+    <div className="flex justify-center items-center min-h-screen bg-gray-100">
+  <form ref={NewPostForm} onSubmit={StudentHandler} className="w-full max-w-lg bg-white p-6 rounded-lg shadow-lg">
+    <h1 className="text-3xl font-semibold text-gray-800 mb-6">Add a Post</h1>
 
-        <label htmlFor="author">Author</label>
-        <input
-          type="text"
-          name="author"
-          id="author"
-          className="border-4 block min-w-0 grow py-1.5 pr-3 pl-1 text-base text-gray-900 placeholder:text-gray-400 focus:outline-none sm:text-sm/6"
-          required
-        />
+    <label htmlFor="author" className="block text-sm font-medium text-gray-700 mb-2">Author</label>
+    <input
+      type="text"
+      name="author"
+      id="author"
+      className="w-full p-3 border-2 border-gray-300 rounded-md focus:ring-2 focus:ring-indigo-500 focus:outline-none transition duration-300 mb-4"
+      required
+    />
 
-        <label htmlFor="name">Title</label>
-        <input
-          type="text"
-          name="names"
-          id="names"
-          className="border-4 block min-w-0 grow py-1.5 pr-3 pl-1 text-base text-gray-900 placeholder:text-gray-400 focus:outline-none sm:text-sm/6"
-          required
-        />
+    <label htmlFor="names" className="block text-sm font-medium text-gray-700 mb-2">Title</label>
+    <input
+      type="text"
+      name="names"
+      id="names"
+      className="w-full p-3 border-2 border-gray-300 rounded-md focus:ring-2 focus:ring-indigo-500 focus:outline-none transition duration-300 mb-4"
+      required
+    />
 
-        <label htmlFor="content">Content</label>
-        <textarea
-          name="content"
-          id="content"
-          className="border-4 block min-w-0 grow py-1.5 pr-3 pl-1 text-base text-gray-900 placeholder:text-gray-400 focus:outline-none sm:text-sm/6"
-          required
-        />
+    <label htmlFor="content" className="block text-sm font-medium text-gray-700 mb-2">Content</label>
+    <textarea
+      name="content"
+      id="content"
+      className="w-full p-3 border-2 border-gray-300 rounded-md focus:ring-2 focus:ring-indigo-500 focus:outline-none transition duration-300 mb-6"
+      required
+    />
 
-        <button type="submit" className="bg-blue-500 text-white p-2 rounded-md">
-          Add Post
-        </button>
-      </form>
-    </div>
+    <button
+      type="submit"
+      className="w-full p-3 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition duration-300"
+    >
+      Add Post
+    </button>
+  </form>
+</div>
+
   );
 };
 

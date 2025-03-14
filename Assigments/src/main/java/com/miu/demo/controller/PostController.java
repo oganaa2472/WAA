@@ -52,16 +52,24 @@ public class PostController {
     public List<Post> getAll() {
         return postService.findAll();
     }
-//    @ResponseStatus(HttpStatus.OK)
-//    @DeleteMapping("/{id}")
-//    public void delete(@PathVariable int id) {
-//        postService.delete(id);
-//    }
-//    @ResponseStatus(HttpStatus.OK)
-//    @PutMapping("/{id}")
-//    public void update(@PathVariable("id") int productId, @RequestBody PostDto p) {
+    @ResponseStatus(HttpStatus.OK)
+    @DeleteMapping("/{id}")
+    public void delete(@PathVariable int id) {
+        postService.delete(id);
+    }
+    @ResponseStatus(HttpStatus.OK)
+    @PutMapping("/{id}")
+    public Post update(@PathVariable("id") int productId, @RequestBody Post p) {
+
+        Optional<Post> p1 = postService.getById(productId);
+        Post post = p1.get();
+        post.setName(p.getName());
+        post.setContent(p.getContent());
+        post.setAuthor(p.getAuthor());
+
+        return post;
 //        postService.update(productId, p);
-//    }
+    }
 //    @ResponseStatus(HttpStatus.OK)
 //    @GetMapping("/by-author")
 //    public List<PostDto> getPostsByAuthor(@RequestParam String author) {
